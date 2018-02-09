@@ -1,2 +1,2 @@
 # hello-world
-Hello world repository.
+Nette aplikace na vytváření životopisů.
