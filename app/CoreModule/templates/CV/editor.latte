@@ -1,0 +1,167 @@
+{define title}Editorr{/define}
+{define description}Editor cv.{/define}
+{block content}
+{* Formulář pro editaci. *}
+{form editorForm}
+{*{control editorForm}*}
+<fieldset>
+<legend>Vzdělání</legend>
+{snippet education}
+{foreach @$form['education']->containers as  $window}
+    {$window['type']->control}
+    {$window['cvs_id']->control}
+<div class="form-snippet-group required">
+	<div class="col-sm-3 control-label"><label for="frm-cvInfoForm-education-0-from" class="required">Nástup do školy</label></div>
+
+	<div class="col-sm-9">{$window['from']->control}</div>
+</div>
+
+<div class="form-snippet-group">
+	<div class="col-sm-3 control-label"><label for="frm-cvInfoForm-education-0-where">Škola</label></div>
+
+	<div class="col-sm-9">{$window['where']->control}</div>
+</div>
+
+
+<div class="form-snippet-group required">
+	<div class="col-sm-3 control-label"><label for="frm-cvInfoForm-education-0-to" class="required">Ukončení docházky</label></div>
+
+	<div class="col-sm-9">{$window['to']->control}</div>
+</div>
+
+<div class="form-snippet-group required">	
+	<div class="col-sm-12 right" style="text-align:right;">{$window['remove']->control}</div>
+</div>
+{/foreach}
+<div class="form-snippet-group required">
+	<div class="col-sm-12 right" style="text-align:right;">{$window['add']->control}</div>
+</div>
+{/snippet}
+
+<legend>Praxe</legend>
+{snippet pr}
+{foreach @$form['pr']->containers as  $window}
+<div class="form-snippet-group required">
+	<div class="col-sm-3 control-label"><label for="frm-cvInfoForm-education-0-from" class="required">Nástup do Práce</label></div>
+
+	<div class="col-sm-9">{$window['from']->control}</div>
+</div>
+
+<div class="form-snippet-group">
+	<div class="col-sm-3 control-label"><label for="frm-cvInfoForm-education-0-where">Zamšstníní</label></div>
+
+	<div class="col-sm-9">{$window['where']->control}</div>
+</div>
+
+<div class="form-snippet-group required">
+	<div class="col-sm-3 control-label"><label for="frm-cvInfoForm-education-0-to" class="required">Ukončení smlouvy</label></div>
+
+	<div class="col-sm-9">{$window['to']->control}</div>
+</div>
+
+<div class="form-snippet-group required">
+	<div class="col-sm-12 right" style="text-align:right;">{$window['remove']->control}</div>
+</div>
+{/foreach}
+<div class="form-snippet-group required">	
+	<div class="col-sm-12 right" style="text-align:right;">{$window['add']->control}</div>
+</div>
+{/snippet}
+
+<legend>Dovednosti</legend>
+{snippet abilities}
+{foreach @$form['abilities']->containers as  $window}
+
+<div class="form-snippet-group">
+	<div class="col-sm-3 control-label"><label for="frm-cvInfoForm-education-0-where">Dovednost</label></div>
+
+	<div class="col-sm-9">{$window['where']->control}</div>
+</div>
+
+
+<div class="form-snippet-group required">
+	<div class="col-sm-12 right" style="text-align:right;">{$window['remove']->control}</div>
+</div>
+{/foreach}
+<div class="form-snippet-group required">	
+	<div class="col-sm-12 right" style="text-align:right;">{$window['add']->control}</div>
+</div>
+{/snippet}
+
+<legend>Jazyky</legend>
+{snippet languages}
+{foreach @$form['languages']->containers as  $window}
+
+<div class="form-snippet-group">
+	<div class="col-sm-3 control-label"><label for="frm-cvInfoForm-education-0-where">Jazyk</label></div>
+
+	<div class="col-sm-9">{$window['where']->control}</div>
+</div>
+
+<div class="form-snippet-group required">
+	<div class="col-sm-12 right" style="text-align:right;">{$window['remove']->control}</div>
+</div>
+{/foreach}
+<div class="form-snippet-group required">	
+	<div class="col-sm-12 right" style="text-align:right;">{$window['add']->control}</div>
+</div>
+{/snippet}
+
+
+<legend>Jiné</legend>
+{snippet others}
+{foreach @$form['others']->containers as  $window}
+
+<div class="form-snippet-group">
+	<div class="col-sm-3 control-label"><label for="frm-cvInfoForm-education-0-where">dovednost</label></div>
+
+	<div class="col-sm-9">{$window['where']->control}</div>
+</div>
+
+<div class="form-snippet-group required">
+	<div class="col-sm-12 right" style="text-align:right;">{$window['remove']->control}</div>
+</div>
+{/foreach}
+<div class="form-snippet-group required">	
+	<div class="col-sm-12 right" style="text-align:right;">{$window['add']->control}</div>
+</div>
+{/snippet}
+
+<legend>Zájmy</legend>
+{snippet hobbys}
+{foreach @$form['hobbys']->containers as  $window}
+
+<div class="form-snippet-group">
+	<div class="col-sm-3 control-label"><label for="frm-cvInfoForm-education-0-where">Koníček</label></div>
+
+	<div class="col-sm-9">{$window['where']->control}</div>
+</div>
+
+<div class="form-snippet-group required">
+	<div class="col-sm-12 right" style="text-align:right;">{$window['remove']->control}</div>
+</div>
+{/foreach}
+<div class="form-snippet-group required">	
+	<div class="col-sm-12 right" style="text-align:right;">{$window['add']->control}</div>
+</div>
+{/snippet}
+    
+    
+<div class="form-snippet-group required">
+    <p style="text-align: center;">Nahrajte svou fotku. Pokut žádnou nenahrajete bude vám nastavena základní.</p>
+	<div class="col-sm-12 right" style="text-align:center;">{$form['Foto']->control}</div>
+</div> 
+
+<div class="form-snippet-group required">	
+	<div class="col-sm-12 right" style="text-align:center;">{$form['submit']->control}</div>
+</div> 
+{/form}
+{/block}
+{block scripts}
+{include parent}
+<script type="text/javascript" src="//tinymce.cachefly.net/4.0/tinymce.min.js"></script>
+<script type="text/javascript" src="{$basePath}/js/tinymce.init.js"></script>
+<script type="text/javascript">
+        initTinyMce("content");
+</script>
+{/block}

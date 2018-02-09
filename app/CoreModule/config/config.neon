@@ -1,0 +1,22 @@
+
+parameters:
+	# Presentery.
+
+	cv: Core:CV
+
+# Nastavení vlastních služeb dále přístupných pomocí DI v rámci CoreModule.
+services:
+	security.authorizator: # Nastavení zdrojů a pravidel přístupu k nim v rámci CoreModule pomocí statického ACL.
+		setup:
+
+			- addResource(%cv%)
+			- allow(%guest%, %cv%, 'editor')
+			- allow(%guest%, %cv%, 'default')
+			- allow(%guest%, %cv%, 'cveditor')
+
+
+	# Nastavení dalších služeb v rámci CoreModule dále přístupných pomocí DI.
+	- App\CoreModule\Model\CVManager
+	- App\Model\UploadModel
+
+

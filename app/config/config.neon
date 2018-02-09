@@ -1,0 +1,79 @@
+
+parameters:
+	# Role.
+	guest: guest
+	member: member
+	admin: admin
+
+	# Presentery.
+	error: Error
+
+# Časová zóna.
+php:
+	date.timezone: Europe/Prague
+
+# Nastavení aplikace.
+application:
+	# Presenter pro zpracování vyjímek a chyb aplikace.
+	errorPresenter: %error%
+
+	# Přesměrovat výjimky přímo už na ErrorPresenter, jinak jdou standartně na laděnku. (Hodí se obzvláště při debuggování ErrorPresentetu.)
+	# catchExceptions: true # Může mít i hodnotu `yes`.
+
+	# Standartní mapování cesty k prezenterům. (Dá se i pozměnit, ale ne všechna nastavení jsou podporována.)
+	mapping:
+		*: App\*Module\Presenters\*Presenter
+
+# Aktivuje panel pro DI v Debugger baru.
+di:
+	debugger: true
+
+# Nastavení sessions v rámci celé aplikace.
+session:
+	expiration: 10 years
+	autoStart: true
+	savePath: "%tempDir%/sessions"
+
+# Nastavení společných rolí v rámci celé aplikace pomocí statického ACL.
+security:
+	roles:
+		guest:
+		member: [guest]
+		admin:
+
+# Nastavení výchozích chybových hlášek pro formuláře.
+forms:
+	messages:
+		REQUIRED: 'Pole %label je povinné.'
+		FLOAT: 'Hodnota %value v poli %label není číslo.'
+		PATTERN: 'Pole %label nemá správný formát.'
+
+# Nastavení vlastních služeb dále přístupných pomocí DI v rámci celé aplikace.
+services:
+	router: App\RouterFactory::createRouter # Nastavení routeru aplikace.
+	authenticator: App\Model\UserManager # Nastavení přihlašování do aplikace.
+	security.authorizator: # Nastavení zdrojů a pravidel přístupu k nim v rámci celé aplikace pomocí statického ACL.
+		setup:
+			- addResource(%error%)
+			- allow(%guest%, %error%)
+			- allow(%admin%)
+
+	# Nastavení dalších služeb v rámci celé aplikace dále přístupných pomocí DI.
+	- App\Forms\BaseFormFactory # Továrnička na formuláře se společným nastavením.
+	- App\Forms\UserForms # Továrnička na uživatelské formuláře - login a register.
+
+extensions:
+	fileUpload: Zet\FileUpload\FileUploadExtension
+	nextras.form: Nextras\Forms\Bridges\NetteDI\FormsExtension
+	replicator: Kdyby\Replicator\DI\ReplicatorExtension
+fileUpload:
+	maxFiles: 1
+	maxFileSize: 2M
+	fileFilter: Zet\FileUpload\Filter\ImageFilter
+	uploadModel: App\CoreModule\Model\CVManager
+
+	uiMode: # full nebo minimal	
+# Vložení konfiguračních souborů z jednotlivých modulů.
+includes:
+	- ../CoreModule/config/config.neon
+

@@ -1,0 +1,16 @@
+{* Vlastní šablona pro renderování formulářů. *}
+<form n:name=$form class="fancyform {ifset $class}{$class}{/ifset}">
+{foreach $form->controls as $input}
+        {var $button = $input->getControl()->type == 'submit'}
+        <div n:class="$button ? form-buttons : form-component">
+                {label $input /}
+                {if $input->error}
+                        {input $input, class => 'invalid'}
+                {else}
+                        {input $input}
+
+                {/if}
+                <div n:if="!$button" class="clear"></div>
+        </div>
+{/foreach}
+</form>

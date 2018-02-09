@@ -1,0 +1,10 @@
+parameters:
+    dbname: prometheus # název databáze
+
+# Konfigurace databázové služby dále přístupné pomocí DI v rámci celé aplikace.
+database:
+	dsn: 'mysql:host=127.0.0.1;dbname=%dbname%'
+	user: root # uživatel
+	password: # heslo
+	options:
+		lazy: yes

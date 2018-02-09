@@ -1,0 +1,115 @@
+<body>
+{define title}{$cv->first_name}{/define}
+{define description}{$cv->surname}{/define}
+{block content}
+    <table>
+        <tr>
+            <td>
+                <img src="http://curriculumvitae.tode.cz/images/{$cv->foto}" alt="Smiley face" height="150px">
+            </td>
+            <td>
+                <h2>{$cv->first_name}&nbsp;{$cv->surname}</h2>  
+                <br />{*<span class="glyphicon glyphicon-log-in">*}<img src="http://curriculumvitae.tode.cz/images/address.bmp" alt="Smiley face" ></span>&nbsp;{$cv->street}
+                <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{$cv->city}                
+                <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;411 17            
+            </td>   
+            <td style="padding-top:50px;">
+                <img src="http://curriculumvitae.tode.cz/images/phone.bmp" alt="Smiley face" height="15px">
+                <br /><img src="http://curriculumvitae.tode.cz/images/mail.bmp" alt="Smiley face" height="15px">
+                <br /><img src="http://curriculumvitae.tode.cz/images/web.bmp" alt="Smiley face" height="15px">
+            </td>
+            <td style="padding-top:50px;">
+                &nbsp;{$cv->tel}
+                <br />&nbsp;{$cv->mail}
+                <br />&nbsp;{$cv->web}
+            </td>
+        </tr>
+                   
+    </table>
+    <table>
+        <caption style="margin-top:20px; margin-bottom:20px; border: 1px solid black; width: 100%; border-radius: 25px; padding-left: 15px;">{*<span class="glyphicon glyphicon-education"></span>*}<img src="http://curriculumvitae.tode.cz/images/education.bmp" alt="Smiley face" height="15px"> Vzdělání</caption>
+        
+        <tr n:foreach="$cvinfo as $cvs" n:if="$cvs->type == ed">
+            <td style="width: 102px; padding-left: 20px;">
+                {$cvs->from|date:'d.m.Y'} -
+             </td>
+             <td >
+                 {$cvs->to|date:'d.m.Y'} &nbsp;&nbsp;-
+             </td>
+             <td style="padding-left:10px;">
+                 {$cvs->where} 
+             </td>
+        </tr>
+         
+</tr>
+</table>
+    <table>
+        <caption style="margin-top:20px; margin-bottom:20px; border: 1px solid black; width: 100%; border-radius: 25px; padding-left: 15px;">{*<span class="glyphicon glyphicon-cog"></span>*}<img src="http://curriculumvitae.tode.cz/images/pr.bmp" alt="Smiley face" height="15px"> Praxe</caption>
+       <tr n:foreach="$cvinfo as $cvs" n:if="$cvs->type == pr">
+            <td style="width: 102px; padding-left: 20px;">
+                {$cvs->from|date:'d.m.Y'} -
+             </td>
+             <td >
+                 {$cvs->to|date:'d.m.Y'} &nbsp;&nbsp;-
+             </td>
+             <td style="padding-left:10px;">
+                 {$cvs->where} 
+             </td>
+       </tr>
+</table>
+             <table>
+        <caption style="margin-top:20px; margin-bottom:20px; border: 1px solid black; width: 100%; border-radius: 25px; padding-left: 15px;">{*<span class="glyphicon glyphicon-book"></span>*}<img src="http://curriculumvitae.tode.cz/images/lang.bmp" alt="Smiley face" height="15px"> Jazykové znalosti </caption>
+        <tr n:foreach="$cvinfo as $cvs" n:if="$cvs->type == lang">
+            <td style="padding-left:20px;">
+                <ul>
+                    <li>{$cvs->where}</li>
+                    </ul>
+
+             </td>
+            
+</tr>
+</table>
+     <table>
+        <caption style=" margin-top:20px; margin-bottom:20px; border: 1px solid black; width: 100%; border-radius: 25px; padding-left: 15px;">{*<span class="glyphicon glyphicon-book"></span>*}<img src="http://curriculumvitae.tode.cz/images/lang.bmp" alt="Smiley face" height="15px"> Jiné</caption>
+        <tr n:foreach="$cvinfo as $cvs" n:if="$cvs->type == other">
+            <td style="padding-left:20px;">
+                <ul>
+                    <li>{$cvs->where}</li>
+                </ul>
+             </td>
+            
+</tr>
+</table>
+         <table>
+        <caption style="margin-top:20px; margin-bottom:20px; border: 1px solid black; width: 100%; border-radius: 25px; padding-left: 15px;">{*<span class="glyphicon glyphicon-book"></span>*}<img src="http://curriculumvitae.tode.cz/images/lang.bmp" alt="Smiley face" height="15px"> Dovednosti</caption>
+        <tr n:foreach="$cvinfo as $cvs" n:if="$cvs->type == ability">
+            <td style="padding-left:20px;">
+                <ul>
+                    <li>{$cvs->where}</li>
+                </ul>
+             </td>
+            
+</tr>
+</table>
+         <table>
+        <caption style="margin-top:20px; margin-bottom:20px; border: 1px solid black; width: 100%; border-radius: 25px; padding-left: 15px;">{*<span class="glyphicon glyphicon-star"></span>*}<img src="http://curriculumvitae.tode.cz/images/hobby.bmp" alt="Smiley face" min-height="15px" max-height="15px" style="padding-bottom:3px;"> Zájmy</caption>
+        <tr n:foreach="$cvinfo as $cvs" n:if="$cvs->type == hobby">
+            <td style="padding-left:20px;">
+                <ul>
+                    <li>{$cvs->where}</li>
+                </ul>
+             </td>
+            
+</tr>
+</table>
+</body>
+{/block}
+{block scripts}
+{include parent}
+<script type="text/javascript" src="//tinymce.cachefly.net/4.0/tinymce.min.js"></script>
+<script type="text/javascript" src="{$basePath}/js/tinymce.init.js"></script>
+<script type="text/javascript">
+        initTinyMce("html");
+</script>
+{/block}
+
