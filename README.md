@@ -1,2 +1,2 @@
 # nette-cv
-Nette aplikace na vytváření životopisů.
+Nette aplication for making CVs.
